@@ -1,1 +1,3 @@
 - Added analog filter option
+- Added some analog autorange margin
+- Added min/max commands for apin
