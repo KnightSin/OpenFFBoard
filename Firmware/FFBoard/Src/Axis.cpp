@@ -232,6 +232,7 @@ void Axis::setPower(uint16_t power)
 {
 	this->power = power;
 	updateTorqueScaler();
+#ifdef TMC4671
 	// Update hardware limits for TMC for safety
 	TMC4671 *drv = dynamic_cast<TMC4671 *>(this->drv.get());
 	if (drv != nullptr)
@@ -240,6 +241,7 @@ void Axis::setPower(uint16_t power)
 		//tmclimits.pid_torque_flux = power;
 		drv->setTorqueLimit(power);
 	}
+#endif
 }
 
 
@@ -263,12 +265,12 @@ void Axis::setDrvType(uint8_t drvtype)
 	if(!this->drv->hasIntegratedEncoder()){
 		this->drv->setEncoder(this->enc);
 	}
-
+#ifdef TMC4671
 	if (dynamic_cast<TMC4671 *>(drv))
 	{
 		setupTMC4671();
 	}
-
+#endif
 	if (!tud_connected())
 	{
 		control->usb_disabled = false;
@@ -280,6 +282,7 @@ void Axis::setDrvType(uint8_t drvtype)
 	}
 }
 
+#ifdef TMC4671
 // Special tmc setup methods
 void Axis::setupTMC4671()
 {
@@ -297,7 +300,7 @@ void Axis::setupTMC4671()
 	drv->setMotionMode(MotionMode::torque);
 	drv->Start(); // Start thread
 }
-
+#endif
 
 
 /**

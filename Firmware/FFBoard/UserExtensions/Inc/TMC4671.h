@@ -8,6 +8,7 @@
 #ifndef TMC4671_H_
 #define TMC4671_H_
 #include "constants.h"
+#ifdef TMC4671DRIVER
 #include <vector>
 #include "cppmain.h"
 #include "MotorDriver.h"
@@ -602,7 +603,7 @@ public:
 	static bool isCreatable();
 	static ClassIdentifier info;
 };
-
+#endif
 #endif /* TMC4671_H_ */
 
 

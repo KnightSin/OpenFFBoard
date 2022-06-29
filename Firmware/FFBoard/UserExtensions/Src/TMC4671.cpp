@@ -6,6 +6,7 @@
  */
 
 #include "TMC4671.h"
+#ifdef TMC4671DRIVER
 #include "ledEffects.h"
 #include "voltagesense.h"
 #include "stm32f4xx_hal_spi.h"
@@ -2832,4 +2833,4 @@ void TMC4671::TMC_ExternalEncoderUpdateThread::updateFromIsr(){
 	this->NotifyFromISR();
 }
 
-
+#endif
